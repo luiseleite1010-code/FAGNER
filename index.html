@@ -946,12 +946,12 @@ function gerarPix() {
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({
       identifier: identifier,
-      amount:     _pedido.valorFinal,
+      amount:     Math.round(_pedido.valorFinal * 100), // centavos
       client: {
         name:     _pedido.nome,
         email:    _pedido.email,
-        phone:    _pedido.tel,
-        document: _pedido.cpf
+        phone:    _pedido.tel.replace(/\D/g,''),
+        document: _pedido.cpf.replace(/\D/g,'')
       },
       metadata: {provider: 'FagnerVivoRio', orderId: identifier}
     })
